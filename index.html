@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfis</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+    body {
+      background: linear-gradient(rgba(40, 40, 40, 0.5), rgba(40, 40, 40, 0.5)),
+        url("https://www.transparenttextures.com/patterns/stardust.png");
+      background-repeat: repeat;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: rgba(10, 10, 10, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 20px;
+      width: 180px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+      transition: transform 0.1s ease;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .card img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid white;
+      margin-bottom: 10px;
+    }
+
+    .card .name {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .icons, .links {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .icons i, .links i {
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .links a:hover::after {
+      content: attr(title);
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 12px;
+      top: 110%;
+      white-space: nowrap;
+    }
+
+    .links i:hover {
+      color: #1DA1F2;
+    }
+
+    #toggle-sound {
+      background: black;
+      border: 2px solid white;
+      border-radius: 30px;
+      padding: 12px 30px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      margin: 30px auto 0 auto;
+      display: block;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    #toggle-sound:hover {
+      background: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- odeiacivil -->
+    <div class="card" id="card-1">
+      <img src="https://media.discordapp.net/attachments/1377343943515177071/1379264885111914577/afc794d8-41fa-4fe6-ba15-b2f05d0f3d70.jpeg?ex=683f9c06&is=683e4a86&hm=d70c372eec66fc172ae0b7c743bc00cffdb42a377a48693e289e488fef9d7ed5&=&format=webp&width=353&height=350" alt="foto de perfil odeiacivil">
+      <p class="name">pjlpoze</p>
+      <p class="tag">@odeiacivil</p>
+      <div class="icons"></div>
+      <div class="links">
+        <a href="https://twitter.com/znxfpss" target="_blank" title="Twitter de odeiacivil - @znxfpss">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- wrpwrp -->
+    <div class="card" id="card-2">
+      <img src="https://cdn.discordapp.com/attachments/1327834997956153344/1379275082794270852/d8ccbec6855a2df8b0ba35f2a6ce1756.png?ex=683fa585&is=683e5405&hm=c039fbabbff3d6c1c876b30e57c7de2eab9e0cff633caed8adc95aaed5ffb316&" alt="foto de perfil wrpwrp">
+      <p class="name">wrpwrp</p>
+      <p class="tag">@wrpwrp</p>
+      <div class="icons"></div>
+      <div class="links">
+        <a href="https://www.youtube.com/@gaguinftw" target="_blank" title="YouTube de wrpwrp - gaguinftw">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+<button id="toggle-sound">🔇 Som Desativado</button>
+
+<!-- YouTube Iframe API -->
+<div id="player" style="display: none;"></div>
+<script>
+  let player;
+  let isMuted = true;
+
+  // carregar API do YouTube
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.body.appendChild(tag);
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '0',
+      width: '0',
+      videoId: 'QvclGiGoFL0',
+      playerVars: {
+        autoplay: 1,
+        loop: 1,
+        playlist: 'QvclGiGoFL0',
+        controls: 0,
+        modestbranding: 1
+      },
+      events: {
+        onReady: (event) => {
+          player.mute();
+          player.playVideo();
+        }
+      }
+    });
+  }
+
+  document.getElementById('toggle-sound').addEventListener('click', () => {
+    if (!player) return;
+    if (isMuted) {
+      player.unMute();
+      document.getElementById('toggle-sound').textContent = '🔊 Som Ativado';
+    } else {
+      player.mute();
+      document.getElementById('toggle-sound').textContent = '🔇 Som Desativado';
+    }
+    isMuted = !isMuted;
+  });
+
+  // Movimento do mouse nos cards
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * 10;
+      const rotateY = ((x - centerX) / centerX) * -10;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+body {
+  background: #000 url("https://www.transparenttextures.com/patterns/stardust.png");
+  font-family: 'Inter', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background-color: #0a0a0a;
+  padding: 20px;
+  border-radius: 20px;
+  width: 180px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-bottom: 10px;
+}
+
+.card .name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card .tag {
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.icons, .links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.icons a, .links a {
+  text-decoration: none;
+}
+
+.icons i, .links i {
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.links i:hover {
+  color: #1DA1F2; /* azul do Twitter */
+}
